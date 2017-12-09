@@ -9,7 +9,7 @@ cmd = os.system
 
 
 def setup_1():
-    '''
+	'''
 	cloudstack_setup.py manager
 	管理节点设置需要和以下8个文件在同一目录下
 	列如:/opt/cloudstack
