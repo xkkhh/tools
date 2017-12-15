@@ -9,7 +9,11 @@ import re
 
 
 def biquge(weburl, homedir = "./"):
-    '爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!'
+    '''爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
+    去这里搜索:
+    http://zhannei.baidu.com/cse/search?s=17194782488582577862&entry=1&q=你要的小说名
+    然后复制粘贴，哈哈哈，不写了，凌晨4点了。
+    '''
     reload(sys)
     sys.setdefaultencoding("utf-8")
 
@@ -44,7 +48,7 @@ def biquge(weburl, homedir = "./"):
 if __name__ == "__main__":
 
     if (len(sys.argv) == 1):
-        print(r"Use Example:spiderbook.py http://www.bqg5200.com/xiaoshuo/3/3590/ C:\Users\Your'sname\Desktop #默认本程序目录")
+        print(r"Use Example:spiderbook.py http://www.bqg5200.com/xiaoshuo/3/3590/ C:\Users\Your'sname\Desktop #不加目录的话默认本程序目录下")
     elif (len(sys.argv) == 2):
         biquge(sys.argv[1])
     elif (len(sys.argv) == 3):
