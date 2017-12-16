@@ -31,7 +31,7 @@ def seartxt():
     userurl = url[input("输入序号下载:")]
     downloadtxt(userurl)
 
-def txtdownload(weburl):
+def downloadtxt(weburl):
     '''
     下载小说
     爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
