@@ -9,6 +9,7 @@ import re
 
 def seartxt():
     '''
+    搜索小说
     爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
     '''
 
@@ -27,11 +28,12 @@ def seartxt():
         n += 1
         url.append(x1)
 
-    downloadurl = url[input("输入序号下载:")]
-    txtdownload(downloadurl)
+    userurl = url[input("输入序号下载:")]
+    downloadtxt(userurl)
 
 def txtdownload(weburl):
     '''
+    下载小说
     爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
     '''
     reload(sys)
