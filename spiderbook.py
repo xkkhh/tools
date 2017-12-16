@@ -1,18 +1,38 @@
 #!/usr/bin/env python
 #coding:utf-8
 #make_by_xkkhh
-#2017年12月16日04:02:00
+#2017年12月16日16:52:10
 
 import sys
 import requests
 import re
 
+def seartxt():
+    '''
+    爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
+    '''
 
-def biquge(weburl, homedir = "./"):
-    '''爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
-    去这里搜索:
-    http://zhannei.baidu.com/cse/search?s=17194782488582577862&entry=1&q=你要的小说名
-    然后复制粘贴，哈哈哈，不写了，凌晨4点了。
+    xsm = raw_input("搜索你要下载的小说名:")
+    r = requests.get('http://zhannei.baidu.com/cse/search?s=17194782488582577862&entry=1&q='+xsm)    #获取搜索小说名
+    r.encoding = "utf-8"
+    xsm = re.findall('<a cpos="title" href="(.*) class="result-game-item-title-link" target="_blank">', r.text) #匹配链接
+
+    n = 0
+    url = []
+
+    for x in xsm:
+        x1 = x[0:39]     #小说链接
+        x2 = x[48:-1]    #小说名字
+        print str(n)+ '.' + x2
+        n += 1
+        url.append(x1)
+
+    downloadurl = url[input("输入序号下载:")]
+    txtdownload(downloadurl)
+
+def txtdownload(weburl):
+    '''
+    爬行笔趣阁的小说,没过多的测试。没问题别找我,有问题更别找我!
     '''
     reload(sys)
     sys.setdefaultencoding("utf-8")
@@ -30,28 +50,29 @@ def biquge(weburl, homedir = "./"):
         try:
             txtchapter = re.findall(u"<title>(.*?)_笔趣阁</title>", r1.text) #获取章节
         except IndexError,e:
-            print e.message                                                              #异常处理
+            print e.message                                                  #异常处理
             continue
 
-        txtzhang = (txtchapter[0])[(len(txtname))+1:]
-        txtstr = re.findall(r'&nbsp;&nbsp;&nbsp;&nbsp;(.+)</div>', r1.text)
+        txtzhang = (txtchapter[0])[(len(txtname))+1:]                       #章节
+        txtstr = re.findall(r'&nbsp;&nbsp;&nbsp;&nbsp;(.+)</div>', r1.text) #章节内容
 
-        for z in txtstr:
-            print "正在写入%s的%s" % (txtname,txtzhang)
-            z = z.replace("<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;","\n") #获取内容
-            f = open(homedir + r'\\'+ txtname + '.txt', "a+") #写入文件,追加模式.
-            f.write(txtzhang + "\n" + z + "\n")
-            f.close()
+        f1 = open('./' + txtname + '.txt', "a+")                #检查是否写入过该章节
+        quchong = f1.read()
+        f1.close()
+
+        if (quchong.find(txtzhang) >= 0):
+            print "找到重复章节%s跳过.." %txtchapter[0]
+        elif (quchong.find(txtzhang) == -1):
+            for z in txtstr:
+                print "正在写入%s的%s" % (txtname,txtzhang)
+                z = z.replace("<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;","\n") #获取内容
+                f2 = open('./'+ txtname + '.txt', "a+") #写入文件,追加模式.
+                f2.write(txtzhang + "\n" + z + "\n")
+                f2.close()
+        else:
+            print 'Error!'
 
     print "写入小说%s完成!" % txtname
 
 if __name__ == "__main__":
-
-    if (len(sys.argv) == 1):
-        print(r"Use Example:spiderbook.py http://www.bqg5200.com/xiaoshuo/3/3590/ C:\Users\Your'sname\Desktop #不加目录的话默认本程序目录下")
-    elif (len(sys.argv) == 2):
-        biquge(sys.argv[1])
-    elif (len(sys.argv) == 3):
-        biquge(sys.argv[1], sys.argv[2])
-    else:
-        print 'Error!'
+    seartxt()
