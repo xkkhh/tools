@@ -7,6 +7,8 @@ import requests
 
 def urlstatucheck():
    for oneurl in urllist.readlines():
+       #example url:http://blog.xkkhh.cn
+       
        url=str(oneurl.strip())[7:]
        try:
            ip =socket.gethostbyname(url)
