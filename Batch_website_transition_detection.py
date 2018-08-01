@@ -27,7 +27,7 @@ def urlstatucheck():
 
 try:
     #http://www.baidu.com
-	#https://www.baidu.com
+    #https://www.baidu.com
     urllist=open("C:/Users/Mr.xkkhh/Desktop/url.txt","r")
     iplist=open("C:/Users/Mr.xkkhh/Desktop/urlstatuscheck.txt","w")
     urlstatucheck()
