@@ -20,14 +20,14 @@ def urlstatucheck():
 			url=str(oneurl.strip())[8:]
 			try:
 				ip =socket.gethostbyname(url)
-				webstatus = requests.get(3url=oneurl.strip(), timeout=10).status_code
+				webstatus = requests.get(url=oneurl.strip(), timeout=10).status_code
 				iplist.writelines(oneurl.strip() + " " + str(ip) + " " + str(webstatus) + "\n")
 			except:
 				print cnc
 
 try:
     #http://www.baidu.com
-    #https://www.baidu.com
+	#https://www.baidu.com
     urllist=open("C:/Users/Mr.xkkhh/Desktop/url.txt","r")
     iplist=open("C:/Users/Mr.xkkhh/Desktop/urlstatuscheck.txt","w")
     urlstatucheck()
