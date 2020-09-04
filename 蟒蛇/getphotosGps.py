@@ -4,7 +4,7 @@ import requests
 from pprint import pprint
 
 
-#调用百度地图API通过经纬度获取位置,apiKey是高德地图的自己申请就完事了
+#apiKey是高德地图的自己申请就完事了
 def geocode1(location, apiKey):
     r = requests.get("https://restapi.amap.com/v3/geocode/regeo?output=json&location=" + location + "&key=" + apiKey + "&radius=1000&extensions=all")
     result = r.json()
